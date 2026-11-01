@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -5,12 +6,35 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173" }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
+
 app.use(express.json());
 
 app.post("/api/generate", async (req, res) => {
   try {
-    const { companyName, applyingAsA, jobDescription, currentResume, coverLetterTone } = req.body;
+    const {
+      companyName,
+      applyingAsA,
+      jobDescription,
+      currentResume,
+      coverLetterTone,
+    } = req.body;
 
     const prompt = `You are a professional career coach and resume optimization expert.
 Generate a personalized cover letter, improved resume content, and ATS analysis.
@@ -69,6 +93,8 @@ Rules:
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Backend running on http://localhost:${process.env.PORT}`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Backend running on port ${PORT}`);
 });

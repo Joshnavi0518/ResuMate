@@ -40,20 +40,23 @@ function HomePage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const API_URL =
+    import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch data from backend");
-      }
+  const response = await fetch(`${API_URL}/api/generate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
 
-      const parsedResponse = await response.json();
-      navigate("/results", { state: parsedResponse });
+  if (!response.ok) {
+    throw new Error("Failed to fetch data from backend");
+  }
+
+  const parsedResponse = await response.json();
+  navigate("/results", { state: parsedResponse });
     } catch (err) {
       console.log(err);
       setApiError("Something went wrong while generating response.");
