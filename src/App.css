@@ -132,10 +132,48 @@ textarea.form-control {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
 }
 
+.response-cell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
 .response-cell h3 {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 1rem;
   color: #f8fafc;
+}
+
+.btn-copy {
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #e5e7eb;
+  background: rgba(99, 102, 241, 0.18);
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+
+.btn-copy:hover {
+  background: rgba(99, 102, 241, 0.32);
+  border-color: rgba(129, 140, 248, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-copy:active {
+  transform: translateY(0);
+}
+
+.btn-copy.copied {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: rgba(52, 211, 153, 0.5);
+  color: #a7f3d0;
 }
 
 .response-cell pre {
