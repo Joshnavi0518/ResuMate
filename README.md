@@ -1,4 +1,5 @@
 # ResuMate – AI-Powered Resume Optimizer
+Try Resumate here : https://resumate-peach.vercel.app/
 
 ResuMate is an AI-powered resume optimization platform designed to help job seekers improve their resumes and increase their chances of getting shortlisted. It analyzes job descriptions and generates tailored resume content, personalized cover letters, relevant keywords, and an estimated ATS score using AI.
 
